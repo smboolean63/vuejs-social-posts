@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Posts</title>
+
+    <script src="https://kit.fontawesome.com/1e3be9b4ce.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="main-title">Social Posts</h1>
+
+    <div id="app" class="posts-list">
+
+        <div class="post" v-for="(post, index) in posts">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img v-if="post.author.image" class="profile-pic" :src="post.author.image" :alt="post.author.name">        
+                        <div v-else class="profile-pic-default"><span>{{getInitials(post.author.name)}}</span></div>            
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">{{post.author.name}}</div>
+                        <div class="post-meta__time">{{post.created}}</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">{{post.content}}</div>
+            <div class="post__image">
+                <img :src="post.media" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button js-like-button" :class="{like-button--liked: post.isLiked}" href="#" @click.prevent="likePost(index)">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b class="js-likes-counter">{{post.likes}}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
